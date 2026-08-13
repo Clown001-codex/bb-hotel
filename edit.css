@@ -1,0 +1,271 @@
+body{
+    background:#111315;
+    font-family:Poppins,sans-serif;
+}
+
+.amenities{
+    background:#111315;
+    font-family:Poppins,sans-serif;
+}
+
+.amenity-card{
+    background:#242526;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:45px 35px;
+    text-align:center;
+    height:100%;
+    transition:.4s ease;
+}
+
+.amenity-card:hover{
+    transform:translateY(-8px);
+    border-color:#d4a04d;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.icon-box{
+    width:90px;
+    height:90px;
+    margin:0 auto 30px;
+    border-radius:50%;
+    background:rgba(212,160,77,.08);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:.4s;
+}
+
+.icon-box i{
+    color:#d4a04d;
+    font-size:2rem;
+}
+
+.amenity-card:hover .icon-box{
+    background:#d4a04d;
+}
+
+.amenity-card:hover .icon-box i{
+    color:#fff;
+}
+
+.amenity-card h3{
+    color:#fff;
+    font-size:2rem;
+    font-weight:500;
+    margin-bottom:20px;
+}
+
+.amenity-card p{
+    color:#d7d7d7;
+    font-size:1.08rem;
+    line-height:1.8;
+    margin-bottom:0;
+}
+
+@media(max-width:991px){
+
+    .amenity-card{
+        padding:35px 25px;
+    }
+
+    .amenity-card h3{
+        font-size:1.6rem;
+    }
+
+}
+
+@media(max-width:767px){
+
+    .icon-box{
+        width:80px;
+        height:80px;
+    }
+
+    .icon-box i{
+        font-size:1.7rem;
+    }
+
+    .amenity-card h3{
+        font-size:1.4rem;
+    }
+
+    .amenity-card p{
+        font-size:1rem;
+    }
+
+}
+ 
+
+/* body {
+    margin: 0;
+    background-color: #101112;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+} */
+
+
+/* Main filter container */
+.filter-box {
+    width: 100%;
+    min-height: 97px;
+    background-color: #202223;
+
+    border: 1px solid #36383a;
+    border-radius: 12px;
+
+    padding: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* Left section */
+.filter-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* Labels */
+.filter-label {
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* Select boxes */
+.filter-select,
+.sort-select {
+    height: 46px;
+
+    background-color: #111315;
+    color: #eeeeee;
+
+    border: 1px solid #393c3f;
+    border-radius: 6px;
+
+    padding: 0 18px;
+
+    font-size: 16px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+/* Individual widths */
+.filter-select {
+    width: 174px;
+}
+
+.sort-select {
+    width: 201px;
+}
+
+
+/* Sort section */
+.sort-area {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* Gold border on Sort select */
+.sort-select {
+    border-color: #b98a3e;
+}
+
+
+/* Focus effect */
+.filter-select:focus,
+.sort-select:focus {
+    border-color: #b98a3e;
+    box-shadow: 0 0 0 1px #b98a3e;
+}
+
+
+/* Dropdown options */
+select option {
+    background-color: #111315;
+    color: white;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+@media (max-width: 992px) {
+
+    .filter-box {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .filter-left {
+        flex-wrap: wrap;
+    }
+
+    .sort-area {
+        justify-content: flex-start;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .filter-box {
+        padding: 20px;
+    }
+
+    .filter-left {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .filter-label {
+        margin-bottom: 3px;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    .sort-area {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .sort-select {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .filter-box {
+        border-radius: 8px;
+        padding: 16px;
+    }
+
+    .filter-select,
+    .sort-select {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .filter-label {
+        font-size: 15px;
+    }
+}

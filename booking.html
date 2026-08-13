@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Your Stay — BB Hotel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .booking-shell {
+      padding: 110px 0;
+      background: #f5f2ec
+    }
+
+    .booking-intro {
+      max-width: 700px;
+      margin-bottom: 45px
+    }
+
+    .booking-intro h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(50px, 7vw, 92px);
+      line-height: .88;
+      font-weight: 500;
+      margin: 14px 0 20px
+    }
+
+    .booking-intro p {
+      max-width: 600px;
+      color: #77716a;
+      line-height: 1.8
+    }
+
+    .booking-card {
+      background: #fff;
+      border: 1px solid #dfd8cd;
+      padding: clamp(24px, 5vw, 55px)
+    }
+
+    .booking-card h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 46px;
+      font-weight: 500;
+      margin: 8px 0 30px
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px
+    }
+
+    .booking-field.full {
+      grid-column: 1/-1
+    }
+
+    .booking-field label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #b18442;
+      margin-bottom: 9px
+    }
+
+    .booking-field input,
+    .booking-field select,
+    .booking-field textarea {
+      width: 100%;
+      border: 1px solid #ddd5ca;
+      background: #faf9f6;
+      padding: 15px;
+      font: inherit;
+      color: #171716;
+      outline: none
+    }
+
+    .booking-field input:focus,
+    .booking-field select:focus,
+    .booking-field textarea:focus {
+      border-color: #b18442
+    }
+
+    .booking-field textarea {
+      min-height: 120px;
+      resize: vertical
+    }
+
+    .booking-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid #e6dfd6
+    }
+
+    .price-preview {
+      color: #77716a
+    }
+
+    .price-preview strong {
+      display: block;
+      color: #171716;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 30px
+    }
+
+    .booking-btn {
+      border: 0;
+      background: #171716;
+      color: #fff;
+      padding: 17px 25px;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase
+    }
+
+    .room-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px
+    }
+
+    .room-option {
+      border: 1px solid #ddd5ca;
+      padding: 16px;
+      cursor: pointer;
+      background: #faf9f6
+    }
+
+    .room-option.selected {
+      border-color: #b18442;
+      box-shadow: inset 0 0 0 1px #b18442
+    }
+
+    .room-option strong {
+      display: block;
+      margin: 6px 0
+    }
+
+    .room-option small {
+      color: #77716a
+    }
+
+    .booking-message {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      line-height: 1.6
+    }
+
+    .booking-error {
+      background: #f8e6e3;
+      color: #8d3931;
+      border-left: 3px solid #9a433a
+    }
+
+    .booking-success {
+      background: #e8f0e5;
+      color: #4e7049;
+      border-left: 3px solid #52734c
+    }
+
+    .summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 25px;
+      padding: 20px;
+      background: #1b1a18;
+      color: #fff
+    }
+
+    .summary small {
+      display: block;
+      color: #c49a58;
+      letter-spacing: 2px
+    }
+
+    .summary strong {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 25px
+    }
+
+    .availability-note {
+      margin: 10px 0 0;
+      color: #77716a;
+      font-size: 12px
+    }
+
+    .unavailable {
+      opacity: .45;
+      cursor: not-allowed
+    }
+
+    .availability-note.ok {
+      color: #52734c
+    }
+
+    .availability-note.bad {
+      color: #9a433a
+    }
+
+    @media(max-width:800px) {
+      .booking-grid {
+        grid-template-columns: 1fr
+      }
+
+      .booking-field.full {
+        grid-column: auto
+      }
+
+      .room-options {
+        grid-template-columns: 1fr
+      }
+
+      .booking-actions {
+        align-items: stretch;
+        flex-direction: column
+      }
+
+      .booking-btn {
+        width: 100%
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-nav">
+    <div class="container-wide nav-inner"><a class="brand" href="index.html"><span class="brand-mark">BB</span><span
+          class="brand-text"><strong>BB</strong><span>HOTEL</span></span></a>
+      <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="rooms.html">Rooms</a><a
+          href="amenities.html">Amenities</a><a href="events.html">Events</a><a href="contact.html">Contact</a></nav><a
+        class="nav-cta" href="booking.html">Book your stay →</a><button class="nav-toggle">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container-wide">
+        <div class="eyebrow">RESERVATIONS</div>
+        <h1>Make room for<br>something good.</h1>
+        <p>Choose your room, dates and preferred arrival and departure times. Your reservation is saved securely and our
+          reservations team can review it.</p>
+      </div>
+    </section>
+
+    <section class="booking-shell">
+      <div class="container-wide">
+        <div class="booking-intro">
+          <div class="eyebrow">YOUR STAY</div>
+          <h1>Plan it your way.</h1>
+          <p>Pick the dates and times that work for you. We'll check live room availability before accepting the
+            reservation.</p>
+        </div>
+
+        <div class="booking-card">
+          <div class="eyebrow">RESERVATION REQUEST</div>
+          <h2>Tell us about your stay.</h2>
+
+          <form id="bookingForm">
+            <div class="booking-grid">
+              <div class="booking-field"><label for="name">FULL NAME</label><input id="name" name="name"
+                  autocomplete="name" required></div>
+              <div class="booking-field"><label for="email">EMAIL</label><input id="email" name="email" type="email"
+                  autocomplete="email" required></div>
+              <div class="booking-field"><label for="phone">PHONE</label><input id="phone" name="phone" type="tel"
+                  autocomplete="tel" placeholder="+234 ..."></div>
+              <div class="booking-field"><label for="guests">GUESTS</label><select id="guests" name="guests">
+                  <option value="1">1 Guest</option>
+                  <option value="2" selected>2 Guests</option>
+                  <option value="3">3 Guests</option>
+                  <option value="4">4 Guests</option>
+                  <option value="5">5 Guests</option>
+                  <option value="6">6 Guests</option>
+                  <option value="7">7 Guests</option>
+                  <option value="8">8 Guests</option>
+                </select></div>
+              <div class="booking-field"><label for="rooms">ROOMS</label><select id="rooms" name="rooms">
+                  <option value="1" selected>1 Room</option>
+                  <option value="2">2 Rooms</option>
+                  <option value="3">3 Rooms</option>
+                  <option value="4">4 Rooms</option>
+                </select></div>
+              <div class="booking-field"><label for="checkinDate">CHECK-IN DATE</label><input id="checkinDate"
+                  type="date" required></div>
+              <div class="booking-field"><label for="checkinTime">CHECK-IN TIME</label><input id="checkinTime"
+                  type="time" value="14:00" required></div>
+              <div class="booking-field"><label for="checkoutDate">CHECK-OUT DATE</label><input id="checkoutDate"
+                  type="date" required></div>
+              <div class="booking-field"><label for="checkoutTime">CHECK-OUT TIME</label><input id="checkoutTime"
+                  type="time" value="12:00" required></div>
+
+              <div class="booking-field full">
+                <label>AVAILABLE ROOMS</label>
+                <div id="roomOptions" class="room-options"></div>
+                <div id="availabilityNote" class="availability-note">Choose your dates to check availability.</div>
+              </div>
+
+              <div class="booking-field full"><label for="specialRequests">SPECIAL REQUESTS</label><textarea
+                  id="specialRequests"
+                  placeholder="Airport transfer, birthday setup, accessibility request, early arrival..."></textarea>
+              </div>
+            </div>
+
+            <div class="summary">
+              <div><small>STAY SUMMARY</small><strong id="summaryText">Select your dates and room</strong></div>
+              <div style="text-align:right"><small>ESTIMATED TOTAL</small><strong id="totalText">₦0</strong></div>
+            </div>
+
+            <div class="booking-actions">
+              <div class="price-preview">Your booking will be sent to the hotel reservations system.</div><button
+                class="booking-btn" type="submit">Request reservation →</button>
+            </div>
+            <div id="bookingMessage" class="booking-message"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container-wide">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">BB<br>Hotel</div>
+          <p>Stay somewhere extraordinary.</p>
+        </div>
+        <div>
+          <h4>Explore</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="rooms.html">Rooms</a><a
+            href="amenities.html">Amenities</a>
+        </div>
+        <div>
+          <h4>Visit</h4>
+          <p>Lagos, Nigeria</p>
+          <p>+234 808 263 6966</p>
+        </div>
+        <div>
+          <h4>Reservations</h4><a href="contact.html">Contact us</a><a href="events.html">Events</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 BB Hotel.</span><span>Designed for memorable stays.</span></div>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+  <script src="booking.js"></script>
+</body>
+
+</html>
